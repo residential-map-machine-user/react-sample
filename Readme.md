@@ -6,6 +6,7 @@ minimal sample implementation
 ## requirement
 
 - NodeJS 7.X~
+- Chrome Browser (or fetch-API implemented browser)
 
 ## setup
 
@@ -13,15 +14,13 @@ minimal sample implementation
 
 ## build
 
-webpack watches update & re-build automatically
+bundle alljs using webpack
 
 `npm run build`
 
 ## run
 
-it need json response server.
-
-`python -m SimpleHTTPServer`
+`npm run server`
 
 ## License
 

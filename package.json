@@ -6,15 +6,18 @@
     "build": "webpack --colors --config ./webpack.config.dev.js",
     "build:prod": "webpack --config ./webpack.config.prod.js",
     "test:unit": "karma start karma.conf.js",
-    "test:all": "karma start karma.conf.js **/*.spec.tsx **/*.spec.ts"
+    "test:all": "karma start karma.conf.js **/*.spec.tsx **/*.spec.ts",
+    "server": "node dev-server.js"
   },
   "devDependencies": {
-    "@types/react": "15.0.24",
     "@types/enzyme": "2.8.0",
     "@types/jasmine": "2.5.47",
+    "@types/react": "15.0.24",
     "@types/react-dom": "15.5.0",
     "@types/react-redux": "4.4.38",
     "enzyme": "2.8.2",
+    "express": "4.15.2",
+    "fetch-mock": "5.10.0",
     "jasmine-core": "2.6.1",
     "karma": "1.7.0",
     "karma-chrome-launcher": "2.1.1",
