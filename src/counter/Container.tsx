@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {decrementAmount, fetchRequestFinish, fetchRequestStart, incrementAmount} from "./module";
 import {ReduxAction, ReduxState} from "../store";
+import {RouteComponentProps} from "react-router";
 
 export class ActionDispatcher {
   constructor(private dispatch: (action: ReduxAction) => void) {}
@@ -44,7 +45,13 @@ export class ActionDispatcher {
   }
 }
 
-export default connect(
-  (state: ReduxState) => ({value: state.counter}),
-  (dispatch: Dispatch<ReduxAction>) => ({actions: new ActionDispatcher(dispatch)})
-)(Counter);
+const mapStateToProps = (state: ReduxState, ownProps: RouteComponentProps<{myParams: string | undefined}>) => {
+  if (ownProps.match.params.myParams === undefined) {
+    return {value: state.counter}
+  }
+  return {value: state.counter, param: ownProps.match.params.myParams}
+}
+
+const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>) => ({actions: new ActionDispatcher(dispatch)})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
