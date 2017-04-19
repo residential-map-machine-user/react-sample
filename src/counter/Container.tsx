@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import {Dispatch} from "redux";
 import {decrementAmount, fetchRequestFinish, fetchRequestStart, incrementAmount} from "./module";
 import {ReduxAction, ReduxState} from "../store";
+import {RouteComponentProps} from "react-router";
 
 export class ActionDispatcher {
   constructor(private dispatch: (action: ReduxAction) => void) {}
@@ -46,5 +47,8 @@ export class ActionDispatcher {
 
 export default connect(
   (state: ReduxState) => ({value: state.counter}),
-  (dispatch: Dispatch<ReduxAction>) => ({actions: new ActionDispatcher(dispatch)})
+  (dispatch: Dispatch<ReduxAction>, ownProps: RouteComponentProps<{myParams: string}>) => {
+    console.log(ownProps.match.params.myParams)
+    return {actions: new ActionDispatcher(dispatch)}
+  }
 )(Counter);
