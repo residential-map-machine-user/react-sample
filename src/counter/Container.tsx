@@ -45,10 +45,13 @@ export class ActionDispatcher {
   }
 }
 
-export default connect(
-  (state: ReduxState) => ({value: state.counter}),
-  (dispatch: Dispatch<ReduxAction>, ownProps: RouteComponentProps<{myParams: string}>) => {
-    console.log(ownProps.match.params.myParams)
-    return {actions: new ActionDispatcher(dispatch)}
+const mapStateToProps = (state: ReduxState, ownProps: RouteComponentProps<{myParams: string | undefined}>) => {
+  if (ownProps.match.params.myParams === undefined) {
+    return {value: state.counter}
   }
-)(Counter);
+  return {value: state.counter, param: ownProps.match.params.myParams}
+}
+
+const mapDispatchToProps = (dispatch: Dispatch<ReduxAction>) => ({actions: new ActionDispatcher(dispatch)})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Counter);
